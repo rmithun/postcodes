@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app = "postcodeApp">
+    <head>
+        <title>UK Postcodes validations</title>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <style type="text/css">
+            
+        </style>
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body ng-controller="validationcontroller">
+        
+        <div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">POSTCODE</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="https://github.com/rmithun/postcodes/blob/master/README.md">Docs</a></li>
+        <li><a href="https://github.com/rmithun/postcodes/">GIT</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+<div class="container">
+  
+  <div class="text-center">
+    <h1>UK Postcode validation</h1>
+    <p class="lead">You can validate UK postcodes and get them formatted.<br/>(no validations in front end)</p>
+    <div class="input-group">
+   <input type="text" class="form-control" ng-model="postcode">
+   <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="validatePostCode()" type="button">Go!</button>
+   </span></div>
+   <div>
+   	<br/>
+   	<div ng-if="response">
+   		<p class="lead">Response</p>
+   		<br/>
+   		{%verbatim%}{{response}}{%endverbatim%}
+   </div>
+   </div>
+</div>
+  </div>
+  
+</div><!-- /.container -->
+        
+        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-cookies.min.js'></script>
+        <script type='text/javascript'>
+        	var postcodeapp = angular.module('postcodeApp', ['ngCookies']);
+			postcodeapp.controller('validationcontroller', function ($scope,$cookies,$http) {
+				$scope.validatePostCode =  function (value) 
+				{
+					$http.get("postcode/validate/"+$scope.postcode+"/").success(function (response) {
+        				console.log(response);
+        				$scope.response = response
+				    }).error(function (data, status, headers, config) {
+	        			alert("error");
+					})
+				}
+			});
+        </script>
+        <style>
+            .ad {
+              position: absolute;
+              bottom: 70px;
+              right: 48px;
+              z-index: 992;
+              background-color:#f3f3f3;
+              position: fixed;
+              width: 155px;
+              padding:1px;
+            }
+            
+            .ad-btn-hide {
+              position: absolute;
+              top: -10px;
+              left: -12px;
+              background: #fefefe;
+              background: rgba(240,240,240,0.9);
+              border: 0;
+              border-radius: 26px;
+              cursor: pointer;
+              padding: 2px;
+              height: 25px;
+              width: 25px;
+              font-size: 14px;
+              vertical-align:top;
+              outline: 0;
+            }
+            
+            .carbon-img {
+              float:left;
+              padding: 10px;
+            }
+            
+            .carbon-text {
+              color: #888;
+              display: inline-block;
+              font-family: Verdana;
+              font-size: 11px;
+              font-weight: 400;
+              height: 60px;
+              margin-left: 9px;
+              width: 142px;
+              padding-top: 10px;
+            }
+            
+            .carbon-text:hover {
+              color: #666;
+            }
+            
+            .carbon-poweredby {
+              color: #6A6A6A;
+              float: left;
+              font-family: Verdana;
+              font-size: 11px;
+              font-weight: 400;
+              margin-left: 10px;
+              margin-top: 13px;
+              text-align: center;
+            }
+        </style>
+    </body>
+</html>
