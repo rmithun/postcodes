@@ -23,7 +23,3 @@ Django application to validate and format UK postcodes.
     Valid Response:
     
       {"message": "The postcode is valid", "valid": true, "postcode": "DN55 1PT"}
-      
-    Invalid Response:
-    
-      {"message": "The postcode is valid", "valid": true, "postcode": "DN55 1PT"}
